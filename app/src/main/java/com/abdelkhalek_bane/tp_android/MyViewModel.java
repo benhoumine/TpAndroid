@@ -2,11 +2,8 @@ package com.abdelkhalek_bane.tp_android;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +11,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyViewModel extends ViewModel {
+public class MyViewModel extends ViewModel{
     private List<User> users;
-    public List<User> getUsers() {
-
-        if (users == null) {
-            users = new ArrayList<User>();
-            loadUsers();
-        }
+    public List<User> getUsers(Observable observable) {
         return users;
     }
 
-    private void loadUsers() {
-        String username = "2";
+    public void loadUsers(Observable observable) {
         Retrofit2Client  client = new Retrofit2Client() ;
-        Call<User> call = client.getService().getUser(username);
+        Call<User> call = client.getService().getUser("ysgv0");
+        users = new ArrayList<User>();
 
         /*try {
             Response<User> response = call.execute();
@@ -42,9 +34,10 @@ public class MyViewModel extends ViewModel {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 int statusCode = response.code();
-                Log.wtf("LoadUsers","stutus code "+statusCode);
                 User user = response.body();
                 users.add(user);
+                observable.onDataReceivedFromWS(users);
+
             }
 
             @Override
@@ -56,4 +49,6 @@ public class MyViewModel extends ViewModel {
 
 
     }
+
+
 }
