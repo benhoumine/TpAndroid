@@ -34,7 +34,6 @@ public class MyViewModel extends ViewModel{
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 int statusCode = response.code();
-                System.out.println("reponse"+response.body().first_name);
                 User user = response.body();
                 users.add(user);
                 observable.onDataReceivedFromWS(users);

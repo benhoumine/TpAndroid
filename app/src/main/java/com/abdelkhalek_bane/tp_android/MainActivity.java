@@ -19,11 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView label = findViewById(R.id.id_label);
-        /*
-         Create a ViewModel the first time the system calls an activity's onCreate() method.
-         Re-created activities receive the same MyViewModel instance created by the first activity.
-        */
-
         MyViewModel model;
         model = new ViewModelProvider(this).get(MyViewModel.class);
         List<User> users = new ArrayList<>() ;
@@ -31,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 new Observable(){
             @Override
             public void onDataReceivedFromWS(List<User> listUsers) {
-                    label.setText("Hello "+listUsers.get(0).first_name);
+                    label.setText("Go --> "+listUsers.get(0).first_name+ " "+listUsers.get(0).last_name);
             }
         }) ;
 
