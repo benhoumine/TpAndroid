@@ -19,9 +19,8 @@ public class MyViewModel extends ViewModel{
 
     public void loadUsers(Observable observable) {
         Retrofit2Client  client = new Retrofit2Client() ;
-        Call<List<User>> call = client.getService().getUser("rlc5o");
+        Call<List<User>> call = client.getService().getUser("wx60s");
         users = new ArrayList<User>();
-
         /*try {
             Response<User> response = call.execute();
             User user = response.body();
@@ -41,7 +40,7 @@ public class MyViewModel extends ViewModel{
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                users.add(new User("null"));
+                users.add(new User("null","null","null"));
             }
         });
 
