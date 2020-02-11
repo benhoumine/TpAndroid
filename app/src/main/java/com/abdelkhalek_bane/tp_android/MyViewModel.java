@@ -19,7 +19,7 @@ public class MyViewModel extends ViewModel{
 
     public void loadUsers(Observable observable) {
         Retrofit2Client  client = new Retrofit2Client() ;
-        Call<User> call = client.getService().getUser("ysgv0");
+        Call<List<User>> call = client.getService().getUser("rlc5o");
         users = new ArrayList<User>();
 
         /*try {
@@ -30,18 +30,17 @@ public class MyViewModel extends ViewModel{
              //handle error
         }
 */
-            call.enqueue(new Callback<User>() {
+            call.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 int statusCode = response.code();
-                User user = response.body();
-                users.add(user);
+                users.addAll(response.body());
                 observable.onDataReceivedFromWS(users);
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<List<User>> call, Throwable t) {
                 users.add(new User("null"));
             }
         });
