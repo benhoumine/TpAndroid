@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 new Observable(){
             @Override
             public void onDataReceivedFromWS(List<User> listUsers) {
-                    label.setText("Go --> "+listUsers.get(0).first_name+ " "+listUsers.get(0).last_name);
+                    label.setText("Go --> "+listUsers.get(1).first_name+ " "+listUsers.get(1).last_name);
             }
         }) ;
 
