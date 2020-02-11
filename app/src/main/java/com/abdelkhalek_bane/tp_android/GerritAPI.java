@@ -10,6 +10,6 @@ import retrofit2.http.Query;
 
 public interface GerritAPI {
 
-    @GET("users/{id}")
+    @GET("bins/{id}")
     Call<User> getUser(@Path("id") String id);
 }
