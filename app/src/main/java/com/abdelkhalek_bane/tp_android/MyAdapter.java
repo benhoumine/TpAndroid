@@ -1,5 +1,6 @@
 package com.abdelkhalek_bane.tp_android;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Icon;
@@ -21,10 +22,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
     private List<User> users;
+    private static RecyclerViewClickListener itemListener;
 
     // constructor
-    public MyAdapter(List<User> users){
+    public MyAdapter(Context context, RecyclerViewClickListener itemListener, List<User> users){
         this.users = users;
+        this.itemListener = itemListener;
     }
 
     @NonNull
@@ -57,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // inner static class
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView itemTitle;
         public TextView itemUrl;
@@ -68,6 +71,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             itemTitle = itemLayoutView.findViewById(R.id.item_title);
             itemUrl = itemLayoutView.findViewById(R.id.item_url);
             itemIcon = itemLayoutView.findViewById(R.id.item_icon);
+            itemLayoutView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+            itemListener.recyclerViewListClicked(v, this.getPosition());
+
         }
     }
 
