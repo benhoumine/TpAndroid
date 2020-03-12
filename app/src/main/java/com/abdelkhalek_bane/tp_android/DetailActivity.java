@@ -1,5 +1,6 @@
 package com.abdelkhalek_bane.tp_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +42,12 @@ public class DetailActivity extends AppCompatActivity {
         textViewPrenom.setText(textViewPrenom.getText()+this.user.first_name);
         textViewNom.setText(textViewNom.getText()+this.user.last_name);
         textViewEmail.setText(textViewEmail.getText()+this.user.email);
-        Picasso.get().load(this.user.avatar).into(imageView);
+        Picasso.get().load(this.user.avatar).resize(1100,1100).centerCrop().into(imageView);
     }
 
+    public void onClickAvater(View view) {
+        Intent intent = new Intent().setClass(this, AffichageImageActivity.class);
+        intent.putExtra("IMAGE_URL", this.user.avatar);
+        startActivity(intent);
+    }
 }
