@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,10 +59,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
+        Gson gson = new Gson();
         User userCliked = this.users.get(position);
-        System.out.println("Vous avez cliqué l'element de la position : " + position);
-        System.out.println("Le user correspondant est  : " + userCliked.first_name + " " + userCliked.last_name);
+        String userJson = gson.toJson(userCliked);
         Intent intent = new Intent().setClass(this, DetailActivity.class);
+        intent.putExtra("USER_JSON", userJson);
         startActivity(intent);
     }
 }
